@@ -1,0 +1,300 @@
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script type="text/javascript" src="http://tajs.qq.com/stats?sId=57372071" charset="UTF-8"></script>
+  <script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+  
+  <title>线性表 | Chuckie&#39;s blog</title>
+  <meta name="author" content="Chuckie">
+  
+  <meta name="description" content="============ 此线性表文档用于我本人学习中的一些心得与记录=======================
+
+[x]  可参考
+
+1.线性表顺序存储结构上的基本运算比如查找、插入、删除、合并等 在这里准备记录一下合并运算的代码，前三个都相对比较简单而且套路差不多12345678910111">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="线性表"/>
+  <meta property="og:site_name" content="Chuckie&#39;s blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/imgs/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="alternate" href="/atom.xml" title="Chuckie&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//libs.baidu.com/jquery/1.8.0/jquery.min.js"></script>
+</head>
+
+
+<body>
+  <header><div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/imgs/logo.png" alt="Chuckie&#39;s blog" title="Chuckie&#39;s blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name">Chuckie&#39;s blog</h1>
+				<h2 class="blog-motto">Walk steps step by step</h2>
+			</div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li> <a href="/atom.xml">RSS</a> </li>
+				</ul>
+			</nav>			
+</div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="w">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header class="article-info clearfix">
+  <h1 itemprop="name">
+	线性表
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://caesar-cq.github.io" title="Chuckie">Chuckie</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2016-07-27T13:05:06.000Z" itemprop="datePublished">2016-07-27</time>
+    Update date:<time datetime="2016-07-27T14:30:37.870Z" itemprop="dateModified">2016-07-27</time>
+    
+  </p>
+</header>
+    <div class="entry">
+		
+        <p>============ 此线性表文档用于我本人学习中的一些心得与记录=======================</p>
+<ul>
+<li>[x]  可参考</li>
+</ul>
+<h2 id="1-线性表顺序存储结构上的基本运算"><a href="#1-线性表顺序存储结构上的基本运算" class="headerlink" title="1.线性表顺序存储结构上的基本运算"></a>1.线性表顺序存储结构上的基本运算</h2><h6 id="比如查找、插入、删除、合并等-在这里准备记录一下合并运算的代码，前三个都相对比较简单而且套路差不多"><a href="#比如查找、插入、删除、合并等-在这里准备记录一下合并运算的代码，前三个都相对比较简单而且套路差不多" class="headerlink" title="比如查找、插入、删除、合并等 在这里准备记录一下合并运算的代码，前三个都相对比较简单而且套路差不多"></a>比如查找、插入、删除、合并等 在这里准备记录一下合并运算的代码，前三个都相对比较简单而且套路差不多</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">#include &lt;stdio.h&gt;</div><div class="line">#include &lt;stdlib.h&gt;</div><div class="line">#include &lt;malloc.h&gt;</div><div class="line"></div><div class="line">#define OK   1</div><div class="line">#define ERROR  0</div><div class="line">#define TRUE 1</div><div class="line">#define FALSE 0</div><div class="line">#define ElemType int</div><div class="line">#define	MAXSIZE  100   /*此处的宏定义常量表示线性表可能达到的最大长度*/</div><div class="line">typedef  struct</div><div class="line">&#123; </div><div class="line">	ElemType  elem[MAXSIZE];  /*线性表占用的数组空间*/</div><div class="line">	int       last;    /*记录线性表中最后一个元素在数组elem[ ]中的位置（下标值），空表置为-1*/</div><div class="line">&#125;SeqList;</div></pre></td></tr></table></figure>
+<h6 id="这边是开头的头文件以及一些定义"><a href="#这边是开头的头文件以及一些定义" class="headerlink" title="++  这边是开头的头文件以及一些定义++"></a>++  这边是开头的头文件以及一些定义++</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div></pre></td><td class="code"><pre><div class="line">void	merge(SeqList *LA,  SeqList *LB,  SeqList *LC)</div><div class="line">&#123;</div><div class="line">	int i,j,k;</div><div class="line">	i=0;j=0;k=0;</div><div class="line">	while(i&lt;=LA-&gt;last&amp;&amp;j&lt;=LB-&gt;last)</div><div class="line">		if(LA-&gt;elem[i]&lt;=LB-&gt;elem[j])</div><div class="line">		&#123;</div><div class="line">			LC-&gt;elem[k]= LA-&gt;elem[i];</div><div class="line">			i++; </div><div class="line">			k++;</div><div class="line">		&#125;</div><div class="line">		else</div><div class="line">		&#123;</div><div class="line">			LC-&gt;elem[k]=LB-&gt;elem[j];</div><div class="line">			j++; </div><div class="line">			k++;</div><div class="line">        &#125;</div><div class="line">	while(i&lt;=LA-&gt;last)	/*当表LA有剩余元素时，则将表LA余下的元素赋给表LC*/</div><div class="line">	&#123;</div><div class="line">		LC-&gt;elem[k]= LA-&gt;elem[i];</div><div class="line">		i++; </div><div class="line">		k++;</div><div class="line">	&#125;</div><div class="line">	while(j&lt;=LB-&gt;last)  /*当表LB有剩余元素时，则将表LB余下的元素赋给表LC*/	</div><div class="line">	&#123;</div><div class="line">		LC-&gt;elem[k]= LB-&gt;elem[j];</div><div class="line">		j++; </div><div class="line">		k++;</div><div class="line">	&#125;</div><div class="line">	LC-&gt;last=LA-&gt;last+LB-&gt;last+1;</div><div class="line">&#125;</div><div class="line"></div><div class="line">void main()</div><div class="line">&#123;</div><div class="line">	SeqList *la,*lb,*lc;</div><div class="line">	int r;</div><div class="line">	int i;</div><div class="line">	la=(SeqList*)malloc(sizeof(SeqList));</div><div class="line">	printf(&quot;请输入线性表A的长度:&quot;);</div><div class="line">	scanf(&quot;%d&quot;,&amp;r);</div><div class="line">	la-&gt;last = r-1;</div><div class="line">	printf(&quot;请输入线性表A的各元素值:\n&quot;);</div><div class="line">	for(i=0; i&lt;=la-&gt;last; i++)</div><div class="line">	&#123;</div><div class="line">		scanf(&quot;%d&quot;,&amp;la-&gt;elem[i]);</div><div class="line">	&#125;</div><div class="line">	lb=(SeqList*)malloc(sizeof(SeqList));</div><div class="line">	printf(&quot;请输入线性表B的长度:&quot;);</div><div class="line">	scanf(&quot;%d&quot;,&amp;r);</div><div class="line">	lb-&gt;last = r-1;</div><div class="line">	printf(&quot;请输入线性表B的各元素值:\n&quot;);</div><div class="line">	for(i=0; i&lt;=lb-&gt;last; i++)</div><div class="line">	&#123;</div><div class="line">		scanf(&quot;%d&quot;,&amp;lb-&gt;elem[i]);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	lc=(SeqList*)malloc(sizeof(SeqList));</div><div class="line"></div><div class="line">	merge(la,lb,lc);</div><div class="line">	printf(&quot;合并后线性表C中的元素为:\n&quot;);</div><div class="line">	for(i=0; i&lt;=lc-&gt;last; i++)</div><div class="line">	&#123;</div><div class="line">		printf(&quot;%d  &quot;,lc-&gt;elem[i]);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>感觉线性表顺序结构各方面都是比较方便操作的也容易理解，容易使用，不过效率可能有点低。上面这个算法的时间复杂度是O（LA-&gt;last+LB-&gt;last）   欸感觉还好啊- -</p>
+<p><img src="http://note.youdao.com/yws/res/81/WEBRESOURCEf163cb1c3070a80183c19126e6936d18" alt="image"></p>
+<h2 id="2、链式存储"><a href="#2、链式存储" class="headerlink" title="2、链式存储"></a>2、链式存储</h2><h6 id="接着就是曾经让我很头疼的单链表啊-双向链表啊-循环链表啊……"><a href="#接着就是曾经让我很头疼的单链表啊-双向链表啊-循环链表啊……" class="headerlink" title="接着就是曾经让我很头疼的单链表啊 双向链表啊 循环链表啊……"></a>接着就是曾经让我很头疼的单链表啊 双向链表啊 循环链表啊……</h6><h6 id="因为那时对指针的操作和理解相当、非常的-糟糕"><a href="#因为那时对指针的操作和理解相当、非常的-糟糕" class="headerlink" title="因为那时对指针的操作和理解相当、非常的 糟糕"></a>因为那时对指针的操作和理解相当、非常的 糟糕</h6><h6 id="其实现在再看链表依然觉得有些头疼"><a href="#其实现在再看链表依然觉得有些头疼" class="headerlink" title="其实现在再看链表依然觉得有些头疼"></a><del>其实现在再看链表依然觉得有些头疼</del></h6><h6 id="继续笔记"><a href="#继续笔记" class="headerlink" title="继续笔记"></a><del>继续笔记</del></h6>
+    </div>
+    <footer>
+        
+        
+		<div class="bdsharebuttonbox">
+	<a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+	<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a>
+	<a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a>
+	<a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="bds_more" data-cmd="more"></a>
+	<a href="#" class="bds_count" data-cmd="count"></a>
+</div>
+<script>
+window._bd_share_config=
+{
+	"common":{
+		"bdSnsKey":{},
+		"bdText":"",
+		"bdMini":"2",
+		"bdMiniList":false,
+		"bdPic":"",
+		"bdStyle":"0",
+		"bdSize":"24"
+	},
+	"share":{},
+	"image":{
+		"viewList":["qzone","tsina","tqq","renren","weixin","fbook","twi"],
+		"viewText":"分享到：",
+		"viewSize":"24"
+	},
+	"selectShare":{
+		"bdContainerClass":null,
+		"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin","fbook","twi"]
+	}
+};
+with(document)0[
+	(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)
+];
+</script>    
+        <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+ <nav id="pagination" >
+    
+    
+    <a href="/2016/07/20/C实现ADT实例/" class="alignright next" title="用C语言实现复数ADT的实例 （数据结构-绪论）">用C语言实现复数ADT的实例 （数据结构-绪论）</a>
+    
+    <div class="clearfix"></div>
+</nav>
+
+
+
+	
+	<section id="comment">
+		<!-- 多说评论框 start -->
+		<div class="ds-thread" data-thread-key="2016/07/27/线性表/" data-title="线性表" data-url="http://caesar-cq.github.io/2016/07/27/线性表/"></div>
+		<!-- 多说评论框 end -->
+		<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+		<script type="text/javascript">
+		var duoshuoQuery = {short_name:"Chuckie"};
+		(function() {
+			var ds = document.createElement('script');
+			ds.type = 'text/javascript';ds.async = true;
+			ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+			ds.charset = 'UTF-8';
+			(document.getElementsByTagName('head')[0] 
+			 || document.getElementsByTagName('body')[0]).appendChild(ds);
+		})();
+		</script>
+		<!-- 多说公共JS代码 end -->
+	</section>
+	
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//baidu.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:caesar-cq.github.io">
+  </form>
+</div>
+
+  
+
+  
+
+  <iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=1&isFans=0&uid=3826550317&verifier=a44587e1&dpc=1"></iframe>
+
+  <div class="widget tag">
+<h3 class="title">Links</h3>
+<ul class="entry">
+<li><a href="" title="" target="_blank">Don't Click This！</a></li>
+<li><a href="https://caesar-cq.github.io/blog" title="" target="_blank">Don't Click This Too！</a></li>
+</ul>
+</div>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer"><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hi,I&#39;m the master of the little blog,you can call me Chuckie. <br/>
+			Better Late Than Never.</p>
+	</section>
+	 
+	<div class="social-font clearfix">
+		
+		<a href="http://weibo.com/3826550317" target="_blank" title="weibo"></a>
+		
+		
+		
+		<a href="https://github.com/caesar-cq" target="_blank" title="github"></a>
+		
+		
+		
+		
+		<a href="mailto:yunhuan15@gmail.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/huangjunhui/concise" target="_blank" title="Concise">Concise</a> © 2016 
+		
+		<a href="http://caesar-cq.github.io/about" target="_blank" title="Chuckie">Chuckie</a>
+		
+		</p>
+</div>
+</footer>
+  <script src="//libs.baidu.com/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/counter.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<div id="totop" style="position:fixed;bottom:100px;right:10px;cursor: pointer;">
+<a title="返回顶部"><img src="/imgs/scrollup.png"/></a>
+</div>
+<script src="/js/totop.js"></script>
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</body>
+</html>
+
+
