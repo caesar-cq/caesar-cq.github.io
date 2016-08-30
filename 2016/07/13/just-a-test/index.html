@@ -15,16 +15,15 @@
 	})();
 	</script>
   
-  <title>用C语言实现复数ADT的实例 （数据结构-绪论） | Chuckie&#39;s blog</title>
+  <title>just a test | Chuckie&#39;s blog</title>
   <meta name="author" content="Chuckie">
   
-  <meta name="description" content="==================持续更新（也许会）====================我是更新分割线========也许只有我一条了==========
-一下午没看几页书，都是些时间复杂度一类的东西，想来也不是什么特别的重点……关于抽象数据类型这玩意-0-书上花了不少篇幅（全是字看的头疼= ">
+  <meta name="description" content="test">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="用C语言实现复数ADT的实例 （数据结构-绪论）"/>
+  <meta property="og:title" content="just a test"/>
   <meta property="og:site_name" content="Chuckie&#39;s blog"/>
 
   
@@ -82,32 +81,21 @@
   <div class="post-content">
     <header class="article-info clearfix">
   <h1 itemprop="name">
-	用C语言实现复数ADT的实例 （数据结构-绪论）
+	just a test
   </h1>
   <p class="article-author">By
     
       <a href="http://caesar-cq.github.io" title="Chuckie">Chuckie</a>
     </p>
   <p class="article-time">
-    <time datetime="2016-07-20T14:20:40.000Z" itemprop="datePublished">2016-07-20</time>
-    更新日期:<time datetime="2016-07-20T14:44:50.958Z" itemprop="dateModified">2016-07-20</time>
+    <time datetime="2016-07-13T11:23:13.000Z" itemprop="datePublished">2016-07-13</time>
+    更新日期:<time datetime="2016-07-20T05:58:08.121Z" itemprop="dateModified">2016-07-20</time>
     
   </p>
 </header>
     <div class="entry">
 		
-        <p>==================持续更新（也许会）====================我是更新分割线========也许只有我一条了==========</p>
-<p>一下午没看几页书，都是些时间复杂度一类的东西，想来也不是什么特别的重点……<br>关于抽象数据类型这玩意-0-书上花了不少篇幅（全是字看的头疼= =）来讲，最后看完觉的是类似于c++中重载一类的东西- -。看完决定该是亲手敲一点感受一下所谓的 抽象数据类型QWQ</p>
-<pre><code>*ADT就是Abstruct Data Type
-</code></pre><p>1.用c语言实现ADT</p>
-<p>①通过结构体将int、float等基本数据理性组合到一起，构成一个结构体类型，再用typedef为该类型或告类型指针重新起一个名字，以增强程序的抽象性、、、、、、、、</p>
-<p>②用c语言的子函数来实现各个操作<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">float</span> realpart;</div><div class="line">	<span class="keyword">float</span> imagpart;</div><div class="line">&#125;Complex; </div><div class="line"> </div><div class="line"><span class="function">Complex <span class="title">create</span><span class="params">(<span class="keyword">float</span> x,<span class="keyword">float</span> y)</span></span>;</div><div class="line"><span class="function">Complex <span class="title">add</span><span class="params">(Complex z1,Complex z2)</span></span>;<span class="comment">//函数原型说明部分 有分号</span></div><div class="line"></div><div class="line"><span class="function">Complex <span class="title">create</span> <span class="params">(<span class="keyword">float</span> x,<span class="keyword">float</span> y)</span>   <span class="comment">//函数定义部分 无分号</span></span></div><div class="line">&#123;</div><div class="line">	Complex z;</div><div class="line">	z.realpart=x;</div><div class="line">	z.imagpart=y;</div><div class="line">	<span class="keyword">return</span> z;</div><div class="line">&#125;                                 <span class="comment">//利用x,y 创建复数z,并将z返回</span></div><div class="line"></div><div class="line"><span class="function">Complex <span class="title">add</span><span class="params">(Complex z1,Complex z2)</span> <span class="comment">//求复数z1，z2的和sum并返回</span></span></div><div class="line">&#123;</div><div class="line">	Complex sum;</div><div class="line">	sum.realpart = z1.realpart + z2.realpart;</div><div class="line">	sum.imagpart = z1.imagpart + z2.imagpart;</div><div class="line">	<span class="keyword">return</span> sum;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">float</span> a,b;</div><div class="line">	Complex c1,c2,c3;</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"\nInput realpart and imagpart: "</span>);</div><div class="line">	<span class="built_in">scanf</span>(<span class="string">"%f%f"</span>,&amp;a,&amp;b);</div><div class="line">	c1 = create(a,b);</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"\nInput realpart and imagpart: "</span>);</div><div class="line">	<span class="built_in">scanf</span>(<span class="string">"%f%f"</span>,&amp;a,&amp;b);</div><div class="line">	c2 = create(a,b);</div><div class="line">	c3 = add(c1,c2);</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"\n\n  c1 == %f+%fi"</span>,c1.realpart,c1.imagpart);</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"\n\n  c2 == %f+%fi"</span>,c2.realpart,c2.imagpart);</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"\n\n  c3 == c1+c2 == %f+%fi"</span>,c3.realpart,c3.imagpart);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>因为用c写的特意找出了封存已久的Vc++6.0  QAQ </p>
-<p>不能边写边报错的编译器不是一个好编译器！！！</p>
-<p>写完报了3个error改了我快20分钟(#￣～￣#)</p>
-<p>都是很低级的格式错误，要是在vs里写绝不会有这样的事(ノಠ益ಠ)ノ彡┻━┻</p>
-<p>也许这篇关于绪论的还会有更新，也许没有了……但一定会有第二篇</p>
-<p>第二篇应该是关于线性表的╰(￣▽￣)╭</p>
+        <p>test </p>
 
     </div>
     <footer>
@@ -158,10 +146,8 @@ with(document)0[
 
  <nav id="pagination" >
     
-    <a href="/2016/07/27/线性表/" class="alignleft prev" title="线性表">线性表</a>
+    <a href="/2016/07/20/C实现ADT实例/" class="alignleft prev" title="用C语言实现复数ADT的实例 （数据结构-绪论）">用C语言实现复数ADT的实例 （数据结构-绪论）</a>
     
-    
-    <a href="/2016/07/13/just-a-test/" class="alignright next" title="just a test">just a test</a>
     
     <div class="clearfix"></div>
 </nav>
@@ -171,7 +157,7 @@ with(document)0[
 	
 	<section id="comment">
 		<!-- 多说评论框 start -->
-		<div class="ds-thread" data-thread-key="2016/07/20/C实现ADT实例/" data-title="用C语言实现复数ADT的实例 （数据结构-绪论）" data-url="http://caesar-cq.github.io/2016/07/20/C实现ADT实例/"></div>
+		<div class="ds-thread" data-thread-key="2016/07/13/just-a-test/" data-title="just a test" data-url="http://caesar-cq.github.io/2016/07/13/just-a-test/"></div>
 		<!-- 多说评论框 end -->
 		<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 		<script type="text/javascript">
